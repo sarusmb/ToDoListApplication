@@ -15,10 +15,10 @@ This application is targeted at any users who want to organize their tasks using
 
 *As a user, I want to be able to:*
 
-- add a task with a due date to my to-do list
+- add a task to my to-do list
 - delete a task from my to-do list
 - set a task as completed
-- view all my pending and completed tasks in my to-do list
+- view all my pending tasks in my to-do list
 
 *User story ideas are based on the examples given in CPSC 210 edX page.*
 
