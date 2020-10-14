@@ -1,11 +1,12 @@
-# My Personal Project
+# CPSC 210 Personal Project
 
-## A subtitle
+## *A simple To-Do list*
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+For my CPSC 210 personal project, I decided to build a to-do list application. This project is of interest to me 
+because I always use some form of digital reminders and to-do lists to organize my day. I want to explore the process 
+behind building such an application and putting the concepts I learned in class to use!
 
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
+The purpose of this application is to allow a user to keep track of all of the tasks they need to complete in an easy 
+and simple manner. The application allows a user to add a task with an associated due date, and cross out these tasks
+as they are completed. The application also allows the user to see all of the entered tasks in their to-do list. 
+This application is targeted at any users who want to organize their tasks using one central application. 
