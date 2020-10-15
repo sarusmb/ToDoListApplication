@@ -1,5 +1,6 @@
 package model;
 
+
 // represents a task
 public class Task {
     private String description;
@@ -38,7 +39,7 @@ public class Task {
     }
 
     //getters
-    public String getName(){
+    public String getName() {
         return this.description;
     }
 

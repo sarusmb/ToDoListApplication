@@ -2,10 +2,11 @@ package ui;
 
 import model.*;
 
+
 public class Main {
     public static void main(String[] args) {
-        Task t1 = new Task("Go to Gym", 1 ,20201014);
-        Task t2 = new Task ("Do math assignment", 2, 20201015);
+        Task t1 = new Task("Go to Gym", 1,20201014);
+        Task t2 = new Task("Do math assignment", 2, 20201015);
         Task t3 = new Task("Make dinner", 3, 20201014);
         Task t4 = new Task("Submit proposal", 4, 20201110);
         Task t5 = new Task("Buy groceries", 5, 20201017);
@@ -29,5 +30,8 @@ public class Main {
         mylist.remainingTasks();
 
     }
+
+
+
 
 }
