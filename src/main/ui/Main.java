@@ -13,8 +13,8 @@ public class Main {
 
         t1.editDescription("Go for a walk");
         t2.editDueDate(20201020);
-        t3.status(true);
-        t4.status(true);
+        t3.changeStatus(true);
+        t4.changeStatus(true);
 
         ToDoList mylist = new ToDoList();
         mylist.allTasks.add(t1);

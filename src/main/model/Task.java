@@ -20,7 +20,7 @@ public class Task {
     // MODIFIES: this
     // EFFECTS: changes the description of a task
     public void editDescription(String rename) {
-        description = rename;
+        this.description = rename;
     }
 
     // REQUIRES : task already has a date
@@ -33,8 +33,25 @@ public class Task {
 
     // MODIFIES : this
     // EFFECTS : changes the status to true if task is completed, or false if task is still pending
-    public void status(boolean completed) {
+    public void changeStatus(boolean completed) {
         this.completed = completed;
+    }
+
+    //getters
+    public String getName(){
+        return this.description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getDueDate() {
+        return dueDate;
+    }
+
+    public boolean getStatus() {
+        return completed;
     }
 
 }
