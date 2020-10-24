@@ -1,6 +1,5 @@
 package model;
 
-import model.Task;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +17,7 @@ class TaskTest {
     @Test
     public void testInitialTask() {
         // tests that a task is initialized correctly
-        assertEquals(testTask.getName(), "Go to mall");
+        assertEquals(testTask.getDescription(), "Go to mall");
         assertEquals(testTask.getId(), 1);
         assertEquals(testTask.getDueDate(), 20201220);
         assertFalse(testTask.getStatus());
@@ -28,7 +27,7 @@ class TaskTest {
     public void testChangeTaskDescription() {
         // tests that a task's description can be changed
         testTask.editDescription("Go to school");
-        assertEquals(testTask.getName(), "Go to school");
+        assertEquals(testTask.getDescription(), "Go to school");
     }
 
     @Test

@@ -39,7 +39,7 @@ public class Task {
     }
 
     //getters
-    public String getName() {
+    public String getDescription() {
         return this.description;
     }
 

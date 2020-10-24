@@ -10,6 +10,7 @@ public class ToDoList {
     public String title;
     public ArrayList<Task> allTasks;
 
+// makes a to-do list
     public ToDoList() {
         title = "My To-Do List";
         allTasks = new ArrayList<Task>();
