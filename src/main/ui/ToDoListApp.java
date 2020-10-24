@@ -4,6 +4,7 @@ import model.Task;
 import model.ToDoList;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -20,10 +21,12 @@ public class ToDoListApp {
         runToDo();
     }
 
-    //EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: processes the user's inputs
     private void runToDo() {
-        System.out.println("Welcome to the To-Do List Application!");
+        System.out.println("Welcome to the To-Do List Application!\n");
         boolean proceed = true;
+        scan = new Scanner(System.in);
         String command = null;
 
         constructList();
@@ -36,12 +39,13 @@ public class ToDoListApp {
                 proceed = false;
             } else {
                 processCommand(command);
-
             }
         }
         System.out.println("You have quit the application. Good-Bye!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes the commands of a user
     private void processCommand(String command) {
         if (command.equals("a")) {
             createTask();
@@ -51,28 +55,35 @@ public class ToDoListApp {
             taskCompleted();
         } else if (command.equals("v")) {
             viewPendingTasks();
+        }  else if (command.equals("q")) {
+            System.out.println("You have quit the application. Good-Bye!");
+            System.exit(1);
         } else {
             System.out.println("Your input is invalid.");
         }
 
     }
 
-    // constructs a To-Do list with an empty list
+
+    // MODIFIES: this
+    // EFFECTS: initializes a To-Do list
     private void constructList() {
         mylist = new ToDoList();
         Scanner scan = new Scanner(System.in);
     }
 
+    // EFFECTS: displays a menu of commands that a user can input
     private void displayOptions() {
         System.out.println("Please select one of the following options:");
         System.out.println("a -> add a task");
         System.out.println("r -> remove a task");
         System.out.println("c -> set a task as 'completed'");
         System.out.println("v -> view all pending tasks in to-do list");
-        System.out.println("q -> quit the application");
+        System.out.println("q -> quit the application\n");
     }
 
-
+    // MODIFIES: this, ToDoList
+    // EFFECTS:  based on the user's input, it creates a task and inputs it into the To-do list
     private void createTask() {
         System.out.println("Enter a description of your task");
         String description = scan.next();
@@ -82,7 +93,7 @@ public class ToDoListApp {
         int id = scan.nextInt();
 
         System.out.println("Enter due date in the format 'YYYYMMDD')");
-        int dueDate =  scan.nextInt();
+        int dueDate = scan.nextInt();
 
         Task task = new Task(description, id, dueDate);
 
@@ -91,49 +102,56 @@ public class ToDoListApp {
 
     }
 
+
+    // Source for  implementation of iterator:
+    // https://stackoverflow.com/questions/15384486/java-concurrent-modification-exception-error
+
+    // REQUIRES: To-do list is not empty
+    // MODIFIES: this, ToDoList
+    // EFFECTS: given an ID number, corresponding task will be removed from list
     private void deleteTask() {
         System.out.println("Enter the ID number of the task you wish to remove");
         int removeId = scan.nextInt();
 
-        for (Task task: mylist.allTasks) {
+        for (Iterator<Task> iter = mylist.allTasks.iterator(); iter.hasNext(); ) {
+            Task task = iter.next();
             if (task.getId() == removeId) {
-                mylist.allTasks.remove(task);
+                iter.remove();
                 System.out.println("Task has been removed to your to-do list.");
-            } else {
-                System.out.println("Error: Task ID is not found.");
             }
         }
     }
 
+    // REQUIRES: a task present in To-Do list
+    // MODIFIES: this, ToDoList
+    // EFFECTS: given the ID number, it sets the task as completed
     private void taskCompleted() {
         System.out.println("Enter the ID number of the task you wish set as complete");
         int completeId = scan.nextInt();
 
-        for (Task task: mylist.allTasks) {
+        for (Task task : mylist.allTasks) {
             if (task.getId() == completeId) {
                 task.changeStatus(true);
-            } else {
-                System.out.println("Error : Task ID is not found.");
+                System.out.println("This task is completed.\n");
             }
         }
-
     }
 
+
+    // EFFECTS: prints out all pending tasks
     private void viewPendingTasks() {
         System.out.println("Here is a list of all your pending tasks");
         ArrayList<String> pendingTasks = new ArrayList<>();
 
-        for (Task task: mylist.allTasks) {
+        for (Task task : mylist.allTasks) {
             if (task.getStatus() == false) {
-                pendingTasks.add(task.getDescription());
-
-                for (String i: pendingTasks) {
-                    System.out.println(i);
-                }
+                System.out.println(task.getDescription() + "\n");
             }
         }
     }
 }
+
+
 
 
 
