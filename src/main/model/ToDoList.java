@@ -1,10 +1,10 @@
 package model;
 
-import model.Task;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+
 
 // represents a to-do list
 public class ToDoList {

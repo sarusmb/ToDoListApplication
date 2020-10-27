@@ -3,7 +3,6 @@ package ui;
 import model.Task;
 import model.ToDoList;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -108,14 +107,6 @@ public class ToDoListApp {
         int removeId = scan.nextInt();
         mylist.removeTask(removeId);
         System.out.println("Task has been removed to your to-do list.");
-
-//        for (Iterator<Task> iter = mylist.allTasks.iterator(); iter.hasNext(); ) {
-//            Task task = iter.next();
-//            if (task.getId() == removeId) {
-//                iter.remove();
-//                System.out.println("Task has been removed to your to-do list.");
-//            }
-//        }
     }
 
     // REQUIRES: a task present in To-Do list
@@ -137,7 +128,6 @@ public class ToDoListApp {
     // EFFECTS: prints out all pending tasks
     private void viewPendingTasks() {
         System.out.println("Here is a list of all your pending tasks");
-        ArrayList<String> pendingTasks = new ArrayList<>();
 
         for (Task task : mylist.allTasks) {
             if (task.getStatus() == false) {
