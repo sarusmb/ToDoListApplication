@@ -45,8 +45,10 @@ class ToDoListTest {
         testToDoList.addTask(t2);
         testToDoList.addTask(t3);
         testToDoList.addTask(t4);
-        testToDoList.removeTask(t3);
-        testToDoList.removeTask(t4);
+        testToDoList.removeTask(3);
+        testToDoList.removeTask(4);
+
+
 
         assertEquals(testToDoList.allTasks.size(),2);
         assertTrue(testToDoList.allTasks.contains(t1));

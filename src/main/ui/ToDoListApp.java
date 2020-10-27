@@ -4,7 +4,6 @@ import model.Task;
 import model.ToDoList;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -35,7 +34,7 @@ public class ToDoListApp {
             displayOptions();
             command = scan.next();
 
-            if (command == "q") {
+            if (command.equals("q")) {
                 proceed = false;
             } else {
                 processCommand(command);
@@ -94,17 +93,12 @@ public class ToDoListApp {
 
         System.out.println("Enter due date in the format 'YYYYMMDD')");
         int dueDate = scan.nextInt();
-
         Task task = new Task(description, id, dueDate);
-
-        mylist.allTasks.add(task);
+        mylist.addTask(task);
         System.out.println("Task has been added to your to-do list.");
 
     }
 
-
-    // Source for  implementation of iterator:
-    // https://stackoverflow.com/questions/15384486/java-concurrent-modification-exception-error
 
     // REQUIRES: To-do list is not empty
     // MODIFIES: this, ToDoList
@@ -112,14 +106,16 @@ public class ToDoListApp {
     private void deleteTask() {
         System.out.println("Enter the ID number of the task you wish to remove");
         int removeId = scan.nextInt();
+        mylist.removeTask(removeId);
+        System.out.println("Task has been removed to your to-do list.");
 
-        for (Iterator<Task> iter = mylist.allTasks.iterator(); iter.hasNext(); ) {
-            Task task = iter.next();
-            if (task.getId() == removeId) {
-                iter.remove();
-                System.out.println("Task has been removed to your to-do list.");
-            }
-        }
+//        for (Iterator<Task> iter = mylist.allTasks.iterator(); iter.hasNext(); ) {
+//            Task task = iter.next();
+//            if (task.getId() == removeId) {
+//                iter.remove();
+//                System.out.println("Task has been removed to your to-do list.");
+//            }
+//        }
     }
 
     // REQUIRES: a task present in To-Do list
