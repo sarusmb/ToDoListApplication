@@ -133,9 +133,11 @@ public class ToDoListApp {
             if (task.getStatus() == false) {
                 System.out.println(task.getDescription() + "\n");
             }
+
         }
     }
 }
+
 
 
 

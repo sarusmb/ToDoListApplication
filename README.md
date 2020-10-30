@@ -19,6 +19,8 @@ This application is targeted at any users who want to organize their tasks using
 - delete a task from my to-do list
 - set a task as completed
 - view all my pending tasks in my to-do list
+- save my to-do list to a file
+- load my to-do list from a file
 
 *User story ideas are based on the examples given in CPSC 210 edX page.*
 
