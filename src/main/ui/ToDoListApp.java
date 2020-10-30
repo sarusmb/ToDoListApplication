@@ -117,7 +117,6 @@ public class ToDoListApp {
         System.out.println("Task has been removed to your to-do list.");
     }
 
-    // REQUIRES: a task present in To-Do list
     // MODIFIES: this, ToDoList
     // EFFECTS: given the ID number, it sets the task as completed
     private void taskCompleted() {
@@ -141,7 +140,6 @@ public class ToDoListApp {
             if (task.getStatus() == false) {
                 System.out.println(task.getDescription() + "\n");
             }
-
         }
     }
 

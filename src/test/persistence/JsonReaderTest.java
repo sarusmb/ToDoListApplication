@@ -5,7 +5,7 @@ import model.ToDoList;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     public void testReaderNoSuchFile() {
-        JsonReader reader = new JsonReader("./data/nonExistentFile()");
+        JsonReader reader = new JsonReader("./data/nonExistentFile");
         try {
             ToDoList td = reader.read();
             fail("No Exception thrown, IOException expected");
@@ -26,7 +26,7 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     public void testReaderEmptyToDoList() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyToDoList");
+        JsonReader reader = new JsonReader("data/testReaderEmptyToDoList.json");
 
         try {
             ToDoList td = reader.read();
@@ -39,7 +39,7 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     public void testReaderToDoList() {
-        JsonReader reader = new JsonReader("./data/testReaderToDoList");
+        JsonReader reader = new JsonReader("data/testReaderToDoList.json");
         try {
             ToDoList td = reader.read();
             assertEquals("My To-Do List", td.getTitle());
@@ -54,20 +54,4 @@ public class JsonReaderTest extends JsonTest {
             fail("IO Exception thrown, not expected");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

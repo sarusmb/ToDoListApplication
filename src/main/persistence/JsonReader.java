@@ -28,6 +28,7 @@ public class JsonReader {
     // EFFECTS : reads a To-Do List from source file and returns it
     // throws an IOException if reading data from file produces error
     public ToDoList read() throws IOException {
+
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseToDoList(jsonObject);
@@ -36,7 +37,6 @@ public class JsonReader {
     // EFFECTS : reads source file as String and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
-
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
@@ -68,7 +68,6 @@ public class JsonReader {
         String description = jsonObject.getString("description");
         int id = jsonObject.getInt("task iD");
         int dueDate = jsonObject.getInt("due date (YYYYMMDD)");
-        //boolean completed = jsonObject.getBoolean("task completed?");
         Task task = new Task(description, id, dueDate);
         td.addTask(task);
     }

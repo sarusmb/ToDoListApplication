@@ -10,6 +10,5 @@ public class JsonTest {
         assertEquals(id, t.getId());
         assertEquals(dueDate, t.getDueDate());
         assertEquals(completed, t.getStatus());
-
     }
 }
