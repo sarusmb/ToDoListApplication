@@ -2,22 +2,34 @@ package ui;
 
 import model.Task;
 import model.ToDoList;
+import persistence.JsonWriter;
+import persistence.JsonReader;
 
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
-// Code format and implementation of Java Scanner has been followed from CPSC 210-TellerApp
+// Code for Java Scanner modelled from CPSC 210-TellerApp
 // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 
 // To-Do list application
 public class ToDoListApp {
+    private static final String JSON_STORE = "./data/todolist.json";
     private ToDoList mylist;
     private Scanner scan;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS : Runs the To-Do list application
-    public ToDoListApp() {
+    public ToDoListApp() throws FileNotFoundException {
+        mylist = new ToDoList();
+        Scanner scan = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runToDo();
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes the user's inputs
@@ -26,8 +38,6 @@ public class ToDoListApp {
         boolean proceed = true;
         scan = new Scanner(System.in);
         String command = null;
-
-        constructList();
 
         while (proceed) {
             displayOptions();
@@ -53,21 +63,17 @@ public class ToDoListApp {
             taskCompleted();
         } else if (command.equals("v")) {
             viewPendingTasks();
-        }  else if (command.equals("q")) {
+        } else if (command.equals("s")) {
+            saveToDoList();
+        } else if (command.equals("l")) {
+            loadToDoList();
+        } else if (command.equals("q")) {
             System.out.println("You have quit the application. Good-Bye!");
             System.exit(1);
         } else {
             System.out.println("Your input is invalid.");
         }
 
-    }
-
-
-    // MODIFIES: this
-    // EFFECTS: initializes a To-Do list
-    private void constructList() {
-        mylist = new ToDoList();
-        Scanner scan = new Scanner(System.in);
     }
 
     // EFFECTS: displays a menu of commands that a user can input
@@ -77,6 +83,8 @@ public class ToDoListApp {
         System.out.println("r -> remove a task");
         System.out.println("c -> set a task as 'completed'");
         System.out.println("v -> view all pending tasks in to-do list");
+        System.out.println("s -> save your to-do list to file");
+        System.out.println("l -> load your to-do list from file");
         System.out.println("q -> quit the application\n");
     }
 
@@ -134,6 +142,33 @@ public class ToDoListApp {
                 System.out.println(task.getDescription() + "\n");
             }
 
+        }
+    }
+
+
+    // code modelled after saveWorkRoom() & loadWorkRoom() in WorkRoomApp Class in JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS : saves To-Do list to a destination file
+    private void saveToDoList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(mylist);
+            jsonWriter.close();
+            System.out.println("Your To-Do-List " + mylist.getTitle() + " has been saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFound: Unable to write your To-Do list to " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES : this
+    // EFFECTS : loads To-Do list from a source file
+    private void loadToDoList() {
+        try {
+            mylist = jsonReader.read();
+            System.out.println("Loaded " + mylist.getTitle() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

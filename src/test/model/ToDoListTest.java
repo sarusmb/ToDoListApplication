@@ -11,8 +11,7 @@ class ToDoListTest {
     Task t2 = new Task ("Do math assignment", 2, 20201015);
     Task t3 = new Task("Make dinner", 3, 20201014);
     Task t4 = new Task("Submit proposal", 4, 20201110);
-    Task t5 = new Task("Buy groceries", 5, 20201017);
-    Task t6 = new Task("Go jogging", 6, 20201018);
+
 
     @BeforeEach
     public void setup() {

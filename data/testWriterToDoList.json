@@ -1,0 +1,29 @@
+{
+    "all tasks": [
+        {
+            "task iD": 1,
+            "description": "Buy groceries",
+            "due date (YYYYMMDD)": 20201017,
+            "task completed?": false
+        },
+        {
+            "task iD": 2,
+            "description": "Go jogging",
+            "due date (YYYYMMDD)": 20201018,
+            "task completed?": false
+        },
+        {
+            "task iD": 3,
+            "description": "Go to Gym",
+            "due date (YYYYMMDD)": 20201014,
+            "task completed?": false
+        },
+        {
+            "task iD": 4,
+            "description": "Do math assignment",
+            "due date (YYYYMMDD)": 20201015,
+            "task completed?": false
+        }
+    ],
+    "title": "My To-Do List"
+}

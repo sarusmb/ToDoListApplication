@@ -1,8 +1,11 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writeable;
+
 // represents a task
-public class Task {
+public class Task implements Writeable {
     private String description;
     private int id;
     private int dueDate;
@@ -55,4 +58,15 @@ public class Task {
         return completed;
     }
 
+
+    @Override
+    // EFFECTS : returns task as json object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("description", description);
+        json.put("task iD", id);
+        json.put("due date (YYYYMMDD)", dueDate);
+        json.put("task completed?", completed);
+        return json;
+    }
 }
