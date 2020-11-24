@@ -59,8 +59,5 @@ public class CompleteTaskListener implements ActionListener {
             ex.printStackTrace();
         }
     }
-
-
-
 }
 

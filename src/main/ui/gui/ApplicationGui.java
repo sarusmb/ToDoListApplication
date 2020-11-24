@@ -24,10 +24,13 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     private AddTaskListener addTaskListener;
     private CompleteTaskListener completeTaskListener;
     private JPanel buttonPane;
+    private JPanel saveLoadPane;
 
     private JButton addTaskButton;
     private JButton completeTaskButton;
     protected JButton removeTaskButton;
+    private JButton saveButton;
+    private JButton loadButton;
 
 
 
@@ -38,7 +41,6 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         myTasks = new ToDoList();
 
         taskModel = new DefaultListModel();
-        taskModel.addElement("");
 
         createTaskJList();
         createTaskListPane();
@@ -46,9 +48,12 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         createAddTaskButton();
         createRemoveTaskButton();
         createCompleteTaskButton();
+        createSaveButton();
+        createLoadButton();
 
         createDescriptionField();
         createButtonPane();
+        createSaveLoadPane();
         createToDoListFrame();
 
     }
@@ -60,6 +65,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(buttonPane, BorderLayout.PAGE_START);
         frame.add(taskListPane, BorderLayout.CENTER);
+        frame.add(saveLoadPane, BorderLayout.PAGE_END);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
@@ -84,6 +90,16 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         add(buttonPane, BorderLayout.PAGE_START);
 
     }
+
+    public void createSaveLoadPane() {
+        saveLoadPane = new JPanel();
+        saveLoadPane.setLayout(new BoxLayout(saveLoadPane, BoxLayout.LINE_AXIS));
+        saveLoadPane.add(saveButton);
+        saveLoadPane.add(loadButton);
+        saveLoadPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        add(saveLoadPane, BorderLayout.PAGE_END);
+    }
+
 
     public void createTaskJList() {
         toDoList = new JList(taskModel);
@@ -120,6 +136,14 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         completeTaskButton.setActionCommand("Remove Task");
         completeTaskButton.addActionListener(completeTaskListener);
         completeTaskButton.setEnabled(true);
+    }
+
+    public void createSaveButton() {
+        saveButton = new JButton("Save");
+    }
+
+    public void createLoadButton() {
+        loadButton = new JButton("Load");
     }
 
 
