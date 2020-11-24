@@ -70,6 +70,20 @@ class ToDoListTest {
    }
 
    @Test
+   public void testReturnRemainingTasksNotCompleted() {
+       testToDoList.addTask(t1);
+       testToDoList.addTask(t2);
+       testToDoList.addTask(t3);
+       testToDoList.addTask(t4);
+       testToDoList.allTasks.get(1).changeStatus(true);
+
+       assertEquals(testToDoList.remainingTasks().size(),3);
+       assertTrue(testToDoList.remainingTasks().contains(t1));
+       assertTrue(testToDoList.remainingTasks().contains(t3));
+       assertTrue(testToDoList.remainingTasks().contains(t4));
+   }
+
+   @Test
     public void testRemoveBasedOnDescription(){
        testToDoList.addTask(t1);
        testToDoList.addTask(t2);
