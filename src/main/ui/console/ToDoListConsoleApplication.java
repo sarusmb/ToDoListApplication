@@ -1,10 +1,12 @@
-package ui;
+package ui.console;
+
+import ui.console.ToDoListApp;
 
 import java.io.FileNotFoundException;
 
 
 // main method for running ToDoList Application
-public class Main {
+public class ToDoListConsoleApplication {
     public static void main(String[] args) {
         try {
             new ToDoListApp();

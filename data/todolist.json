@@ -1,23 +1,9 @@
 {
-    "all tasks": [
-        {
-            "task iD": 1,
-            "description": "Finish math hw",
-            "due date (YYYYMMDD)": 20202020,
-            "task completed?": false
-        },
-        {
-            "task iD": 2,
-            "description": "study for exam",
-            "due date (YYYYMMDD)": 20202020,
-            "task completed?": false
-        },
-        {
-            "task iD": 3,
-            "description": "go to store",
-            "due date (YYYYMMDD)": 20202020,
-            "task completed?": false
-        }
-    ],
+    "all tasks": [{
+        "task iD": 1,
+        "description": "afdfa",
+        "due date (YYYYMMDD)": 303030303,
+        "task completed?": false
+    }],
     "title": "My To-Do List"
 }
