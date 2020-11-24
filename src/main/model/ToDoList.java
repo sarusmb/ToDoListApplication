@@ -62,6 +62,8 @@ public class ToDoList implements Writeable {
         for (Task task : allTasks) {
             if (!task.getStatus()) {
                 pendingTasks.add(task);
+            } else {
+                pendingTasks.add(null);
             }
         }
         return pendingTasks;
