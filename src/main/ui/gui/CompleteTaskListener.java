@@ -42,6 +42,7 @@ public class CompleteTaskListener implements ActionListener {
     public void setTaskAsCompleted(String taskDescription) {
         for (Task task : applicationGui.myTasks.allTasks) {
             if (task.getDescription() == taskDescription) {
+                task.editDescription(checkMark + "  " + taskDescription);
                 task.changeStatus(true);
             }
         }

@@ -10,8 +10,12 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import model.Task;
 import model.ToDoList;
-
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class ApplicationGui extends JPanel implements ListSelectionListener {
@@ -32,6 +36,10 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     private JButton saveButton;
     private JButton loadButton;
 
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/toDoListManager.json";
+
 
 
 
@@ -39,6 +47,8 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         super(new BorderLayout());
 
         myTasks = new ToDoList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
         taskModel = new DefaultListModel();
 
@@ -140,10 +150,18 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
 
     public void createSaveButton() {
         saveButton = new JButton("Save");
+        SaveListener saveListener = new SaveListener(this);
+        saveButton.setActionCommand("Save");
+        saveButton.addActionListener(saveListener);
+        saveButton.setEnabled(true);
     }
 
     public void createLoadButton() {
         loadButton = new JButton("Load");
+        LoadListener loadListener = new LoadListener(this);
+        loadButton.setActionCommand("Load");
+        loadButton.addActionListener(loadListener);
+        loadButton.setEnabled(true);
     }
 
 
@@ -164,6 +182,38 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
             }
         }
     }
+
+    //--------Load and save
+
+
+    // EFFECTS : saves To-Do list to a destination file
+    public void saveToDoList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myTasks);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFound: Unable to write your To-Do list to " + JSON_STORE);
+        }
+    }
+
+
+    // MODIFIES : this
+    // EFFECTS : loads To-Do list from a source file
+    public void loadToDoList() {
+        try {
+            myTasks = jsonReader.read();
+
+            for (Task task : myTasks.allTasks) {
+                String taskDescription = task.getDescription();
+                taskModel.addElement(taskDescription);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 
 
 }
