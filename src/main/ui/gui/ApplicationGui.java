@@ -5,14 +5,7 @@ https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProj
 src/components/ListDemo.java
  */
 
-import model.Task;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import persistence.JsonReader;
-import ui.persistence.GuiReader;
-import ui.persistence.GuiWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -32,12 +25,8 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     private JButton completeTaskButton;
     private CompleteTaskListener completeTaskListener;
 
-    private GuiReader jsonReader;
 
 
-
-    private JButton saveButton;
-    private SaveListener saveListener;
 
     public ApplicationGui() {
         super(new BorderLayout());
@@ -48,7 +37,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         createAddTaskButton();
         createRemoveTaskButton();
         createCompleteTaskButton();
-        createSaveButton();
+
         createDescriptionField();
         createButtonPane();
         createToDoListFrame();
@@ -111,13 +100,6 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         addTaskButton.setEnabled(false);
     }
 
-    public void createSaveButton() {
-        saveButton = new JButton("Save");
-        saveListener = new saveListener(this, saveButton);
-        addTaskButton.setActionCommand("saveListener");
-        addTaskButton.addActionListener(addTaskListener);
-
-    }
 
 
     public void createRemoveTaskButton() {
@@ -154,30 +136,5 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         }
     }
 
-    //----------JSON reader & writer
-
-    // EFFECTS : returns tasks in To-Do list as a JSON array
-    public JSONArray toJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (int i = 0; i < taskModel.size(); i++) {
-            String task = taskModel.getElementAt(i).toString();
-            jsonArray.put(task);
-        }
-        return jsonArray;
-    }
-
-
-
-
-   /* // MODIFIES : this
-    // EFFECTS : loads To-Do list from a source file
-    private void loadToDoList() {
-        try {
-            Athis = jsonReader.read();
-        } catch (IOException e) {
-            //expected
-        }
-    }*/
 
 }
