@@ -1,6 +1,7 @@
 package ui.gui;
 
 
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -12,6 +13,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 
 import java.io.File;
+import model.Task;
 
 
 /* This class has been modelled after HireListener class in the ListDemo Application
@@ -32,7 +34,7 @@ class AddTaskListener implements ActionListener, DocumentListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String description = applicationGui.taskDescription.getText();
-        int index = applicationGui.tasks.getSelectedIndex();
+        int index = applicationGui.toDoList.getSelectedIndex();
         if (index == -1) {
             index = 0;
         } else {
@@ -40,10 +42,14 @@ class AddTaskListener implements ActionListener, DocumentListener {
         }
         applicationGui.taskModel.insertElementAt(description, index);
         playSound("data/clickSound.wav");
+
+        Task task = new Task(description, 0,0);
+        applicationGui.myTasks.addTask(task);
+
         applicationGui.taskDescription.requestFocusInWindow();
         applicationGui.taskDescription.setText("");
-        applicationGui.tasks.setSelectedIndex(index);
-        applicationGui.tasks.ensureIndexIsVisible(index);
+        applicationGui.toDoList.setSelectedIndex(index);
+        applicationGui.toDoList.ensureIndexIsVisible(index);
 
     }
 

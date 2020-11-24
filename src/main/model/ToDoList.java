@@ -42,6 +42,18 @@ public class ToDoList implements Writeable {
         }
     }
 
+    // TEST THIS FUNCTION !!!
+    public void removeTask(String description) {
+        for (Iterator<Task> iter = allTasks.iterator(); iter.hasNext(); ) {
+            Task task = iter.next();
+            if (task.getDescription() == description) {
+                iter.remove();
+            }
+        }
+    }
+
+
+
     // EFFECTS : constructs a list of remaining tasks
     public ArrayList remainingTasks() {
         ArrayList<Task> pendingTasks = new ArrayList<>();

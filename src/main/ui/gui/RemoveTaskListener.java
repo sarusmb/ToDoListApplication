@@ -6,6 +6,10 @@ import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Iterator;
+
+import model.Task;
+
 
 /* This class has been modelled after FireListener class in the ListDemo Application
 https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/
@@ -21,7 +25,17 @@ public class RemoveTaskListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int index = applicationGui.tasks.getSelectedIndex();
+        int index = applicationGui.toDoList.getSelectedIndex();
+
+        String taskDescription = applicationGui.taskModel.getElementAt(index).toString();
+
+        // removes task from list when task descriptions are equal
+        for (Iterator<Task> iter = applicationGui.myTasks.allTasks.iterator(); iter.hasNext();) {
+            Task task = iter.next();
+            if (task.getDescription() == taskDescription) {
+                iter.remove();
+            }
+        }
         applicationGui.taskModel.remove(index);
         playSound("data/clickSound.wav");
         int size = applicationGui.taskModel.getSize();
@@ -31,8 +45,8 @@ public class RemoveTaskListener implements ActionListener {
             if (index == applicationGui.taskModel.getSize()) {
                 index--;
             }
-            applicationGui.tasks.setSelectedIndex(index);
-            applicationGui.tasks.ensureIndexIsVisible(index);
+            applicationGui.toDoList.setSelectedIndex(index);
+            applicationGui.toDoList.ensureIndexIsVisible(index);
         }
     }
 

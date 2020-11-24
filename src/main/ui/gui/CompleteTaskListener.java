@@ -7,6 +7,7 @@ import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import model.Task;
 
 
 public class CompleteTaskListener implements ActionListener {
@@ -20,19 +21,29 @@ public class CompleteTaskListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int index = applicationGui.tasks.getSelectedIndex();
+        int index = applicationGui.toDoList.getSelectedIndex();
         String taskDescription = applicationGui.taskModel.getElementAt(index).toString();
 
         if (!taskDescription.contains(checkMark)) {
+            setTaskAsCompleted(taskDescription);
             taskDescription = checkMark + "  " + taskDescription;
             playSound("data/completeTaskSound.wav");
             applicationGui.taskModel.remove(index);
             applicationGui.taskModel.insertElementAt(taskDescription,index);
-            applicationGui.tasks.setSelectedIndex(index);
-            applicationGui.tasks.ensureIndexIsVisible(index);
+            applicationGui.toDoList.setSelectedIndex(index);
+            applicationGui.toDoList.ensureIndexIsVisible(index);
         } else {
             playSound("data/errorSound.wav");
             return;
+        }
+    }
+
+
+    public void setTaskAsCompleted(String taskDescription) {
+        for (Task task : applicationGui.myTasks.allTasks) {
+            if (task.getDescription() == taskDescription) {
+                task.changeStatus(true);
+            }
         }
     }
 
@@ -48,6 +59,8 @@ public class CompleteTaskListener implements ActionListener {
             ex.printStackTrace();
         }
     }
+
+
 
 }
 

@@ -10,30 +10,39 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import model.ToDoList;
+
 
 
 public class ApplicationGui extends JPanel implements ListSelectionListener {
-    protected JList tasks;
+    protected ToDoList myTasks;
+    protected JList toDoList;
     protected DefaultListModel taskModel;
     protected JTextField taskDescription;
     private JScrollPane taskListPane;
-    private JButton addTaskButton;
 
-    protected JButton removeTaskButton;
     private AddTaskListener addTaskListener;
-    private JPanel buttonPane;
-    private JButton completeTaskButton;
     private CompleteTaskListener completeTaskListener;
+    private JPanel buttonPane;
+
+    private JButton addTaskButton;
+    private JButton completeTaskButton;
+    protected JButton removeTaskButton;
 
 
 
 
     public ApplicationGui() {
         super(new BorderLayout());
+
+        myTasks = new ToDoList();
+
         taskModel = new DefaultListModel();
         taskModel.addElement("");
+
         createTaskJList();
         createTaskListPane();
+
         createAddTaskButton();
         createRemoveTaskButton();
         createCompleteTaskButton();
@@ -42,10 +51,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         createButtonPane();
         createToDoListFrame();
 
-
     }
-
-
 
     public void createToDoListFrame() {
         JFrame frame = new JFrame();
@@ -80,15 +86,15 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     }
 
     public void createTaskJList() {
-        tasks = new JList(taskModel);
-        tasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tasks.setSelectedIndex(0);
-        tasks.addListSelectionListener(this);
+        toDoList = new JList(taskModel);
+        toDoList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        toDoList.setSelectedIndex(0);
+        toDoList.addListSelectionListener(this);
 
     }
 
     public void createTaskListPane() {
-        taskListPane = new JScrollPane(tasks);
+        taskListPane = new JScrollPane(toDoList);
         taskListPane.createVerticalScrollBar();
     }
 
@@ -99,7 +105,6 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         addTaskButton.addActionListener(addTaskListener);
         addTaskButton.setEnabled(false);
     }
-
 
 
     public void createRemoveTaskButton() {
@@ -127,7 +132,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
-            if (tasks.getSelectedIndex() == -1) {
+            if (toDoList.getSelectedIndex() == -1) {
                 removeTaskButton.setEnabled(false);
 
             } else {
