@@ -42,7 +42,9 @@ public class ToDoList implements Writeable {
         }
     }
 
-    // TEST THIS FUNCTION !!!
+    // REQUIRES : task must already be in the to-do list
+    // MODIFIES : this
+    // EFFECTS : removes task from the to-do list given its description
     public void removeTask(String description) {
         for (Iterator<Task> iter = allTasks.iterator(); iter.hasNext(); ) {
             Task task = iter.next();
@@ -65,8 +67,8 @@ public class ToDoList implements Writeable {
         return pendingTasks;
     }
 
-    //getters
 
+    //getters
     public String getTitle() {
         return title;
     }
@@ -74,7 +76,6 @@ public class ToDoList implements Writeable {
 
     // code modelled after toJson() and thingiesToJason() in WorkRoom Class in JsonSerializationDemo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
     @Override
     // EFFECTS : returns title and all tasks of the To-Do List as a JSON object
     public JSONObject toJson() {

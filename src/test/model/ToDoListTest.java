@@ -68,4 +68,19 @@ class ToDoListTest {
        assertTrue(testToDoList.remainingTasks().contains(t2));
        assertTrue(testToDoList.remainingTasks().contains(t4));
    }
+
+   @Test
+    public void testRemoveBasedOnDescription(){
+       testToDoList.addTask(t1);
+       testToDoList.addTask(t2);
+       testToDoList.addTask(t3);
+       testToDoList.addTask(t4);
+       testToDoList.removeTask("Make dinner");
+       testToDoList.removeTask("Submit proposal");
+       assertEquals(testToDoList.allTasks.size(),2);
+       assertTrue(testToDoList.allTasks.contains(t1));
+       assertTrue(testToDoList.allTasks.contains(t2));
+       assertFalse(testToDoList.allTasks.contains(t3));
+       assertFalse(testToDoList.allTasks.contains(t4));
+   }
 }

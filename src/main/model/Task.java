@@ -59,6 +59,11 @@ public class Task implements Writeable {
     }
 
 
+
+
+    // code modelled after toJson() in JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
     @Override
     // EFFECTS : returns task as json object
     public JSONObject toJson() {
