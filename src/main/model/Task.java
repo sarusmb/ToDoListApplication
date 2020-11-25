@@ -11,9 +11,10 @@ public class Task implements Writeable {
     private int dueDate;
     private boolean completed;
 
-
-    // EFFECTS: creates a task with a description, due date, any additional notes and is yet to be completed
-    public Task(String description, int id, int dueDate) {
+    // REQUIRES: description must be >=1 character and <= 100 characters. ID number must by >=0
+    //           and <= 999. ID Must be an integer value.
+    // EFFECTS: creates a task with a description, id and due date,
+    public Task(String description, int id, int dueDate)  {
         this.description = description;
         this.id = id;
         this.dueDate = dueDate;
@@ -57,9 +58,6 @@ public class Task implements Writeable {
     public boolean getStatus() {
         return completed;
     }
-
-
-
 
     // code modelled after toJson() in JsonSerializationDemo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

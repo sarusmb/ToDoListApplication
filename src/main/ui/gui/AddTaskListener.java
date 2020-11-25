@@ -19,7 +19,7 @@ src/components/ListDemo.java
 
 // adds a task to the To-Do List when AddTaskButton is pressed
 class AddTaskListener implements ActionListener, DocumentListener {
-    private final ApplicationGui applicationGui;
+    private ApplicationGui applicationGui;
     private boolean buttonEnabled = false;
     private JButton button;
 
@@ -42,11 +42,10 @@ class AddTaskListener implements ActionListener, DocumentListener {
         } else {
             index++;
         }
+        Task task = new Task(description, 0,00000000);
+        applicationGui.myTasks.addTask(task);
         applicationGui.taskModel.insertElementAt(description, index);
         playSound("data/clickSound.wav");
-
-        Task task = new Task(description, 0,0);
-        applicationGui.myTasks.addTask(task);
 
         applicationGui.taskDescription.requestFocusInWindow();
         applicationGui.taskDescription.setText("");
@@ -54,7 +53,20 @@ class AddTaskListener implements ActionListener, DocumentListener {
         applicationGui.toDoList.ensureIndexIsVisible(index);
     }
 
-    // source code
+    //getter
+    public ApplicationGui getApplicationGui() {
+        return applicationGui;
+    }
+
+    //setter
+    public void setApplicationGui(ApplicationGui appGui) {
+        if (getApplicationGui() != appGui) {
+            this.applicationGui = appGui;
+            applicationGui.addListenerToAddButton(this);
+        }
+    }
+
+
     // http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
     // REQUIRES: a sound file in data folder
     // EFFECTS : plays a given sound

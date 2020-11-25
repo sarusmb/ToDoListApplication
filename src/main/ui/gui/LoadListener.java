@@ -14,7 +14,6 @@ public class LoadListener implements ActionListener {
     // EFFECTS : creates a loadListener
     public LoadListener(ApplicationGui applicationGui) {
         this.applicationGui = applicationGui;
-
     }
 
     @Override

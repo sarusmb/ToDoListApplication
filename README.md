@@ -24,3 +24,5 @@ This application is targeted at any users who want to organize their tasks using
 
 *User story ideas are based on the examples given in CPSC 210 edX page.*
 
+**Phase 4: Task 2**
+- Bi-directional association between AddTaskListener & ApplicationGui 

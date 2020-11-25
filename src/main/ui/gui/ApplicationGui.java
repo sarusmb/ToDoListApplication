@@ -23,7 +23,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
 
 
     private AddTaskListener addTaskListener;
-    private CompleteTaskListener completeTaskListener;
+
 
     private JPanel buttonPane;
     private JPanel saveLoadPane;
@@ -97,6 +97,8 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         buttonPane.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         add(buttonPane, BorderLayout.PAGE_START);
 
+
+
     }
 
     // REQUIRES: saveButton, loadButton must be constructed
@@ -136,9 +138,24 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     public void createAddTaskButton() {
         addTaskButton = new JButton("Add Task");
         addTaskListener = new AddTaskListener(this, addTaskButton);
+        addListenerToAddButton(addTaskListener);
+    }
+
+    // MODIFIES: this
+    // EFFECTS : adds listener to addTaskButton
+    public void addListenerToAddButton(AddTaskListener listener) {
+        if (getAddListener() != addTaskListener) {
+            this.addTaskListener = listener;
+            addTaskListener.setApplicationGui(this);
+        }
         addTaskButton.setActionCommand("Add Task");
         addTaskButton.addActionListener(addTaskListener);
         addTaskButton.setEnabled(false);
+    }
+
+    // getter
+    public AddTaskListener getAddListener() {
+        return addTaskListener;
     }
 
     // MODIFIES: this
@@ -154,13 +171,11 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
     // EFFECTS: creates completeTaskButton
     public void createCompleteTaskButton() {
         completeTaskButton = new JButton("Complete Task");
-        completeTaskListener = new CompleteTaskListener(this);
+        CompleteTaskListener completeTaskListener = new CompleteTaskListener(this);
         completeTaskButton.setActionCommand("Remove Task");
         completeTaskButton.addActionListener(completeTaskListener);
         completeTaskButton.setEnabled(true);
     }
-
-
 
     // EFFECTS: creates saveButton
     public void createSaveButton() {

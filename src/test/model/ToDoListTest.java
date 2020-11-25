@@ -81,6 +81,7 @@ class ToDoListTest {
        assertTrue(testToDoList.remainingTasks().contains(t1));
        assertTrue(testToDoList.remainingTasks().contains(t3));
        assertTrue(testToDoList.remainingTasks().contains(t4));
+       assertFalse(testToDoList.remainingTasks().contains(t2));
    }
 
    @Test
@@ -98,3 +99,4 @@ class ToDoListTest {
        assertFalse(testToDoList.allTasks.contains(t4));
    }
 }
+
