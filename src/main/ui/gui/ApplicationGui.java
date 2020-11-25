@@ -221,7 +221,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         }
     }
 
-
+    //JsonSerializationDemo
     // EFFECTS : saves To-Do list to a destination file
     public void saveToDoList() {
         try {
@@ -233,7 +233,7 @@ public class ApplicationGui extends JPanel implements ListSelectionListener {
         }
     }
 
-
+    //JsonSerializationDemo
     // MODIFIES : this
     // EFFECTS : loads To-Do list from a source file
     public void loadToDoList() {
